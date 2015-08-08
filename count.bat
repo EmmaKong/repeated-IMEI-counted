@@ -1,0 +1,4 @@
+
+perl counted.pl
+
+pause
