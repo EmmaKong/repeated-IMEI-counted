@@ -22,7 +22,7 @@ my $workSheet = $workbook->Sheets(1);
 #读出EXCEL数据到数组
 my $Rowcount = $workSheet->usedrange->rows->count;       #最大有效行数 
 $totalRow = $Rowcount + 1;
-my $numDRow = X.$totalRow;
+my $numDRow = Z.$totalRow;
 my $allDataArray1 = $workSheet->Range("A1:$numDRow")->{'Value'}; 	 	 
 print "aonf $totalRow \n";
 my @imei_data1 = 0 x $Rowcount-1;
@@ -43,7 +43,7 @@ my $workSheet = $workbook->Sheets(1);
 #读出EXCEL数据到数组
 my $Rowcount = $workSheet->usedrange->rows->count;       #最大有效行数 
 $totalRow = $Rowcount + 1;
-my $numDRow = X.$totalRow;
+my $numDRow = Z.$totalRow;
 my $allDataArray2 = $workSheet->Range("A1:$numDRow")->{'Value'}; 	 
 print "aonf $totalRow \n";
 my @imei_data2 = 0 x $Rowcount-1;
@@ -103,7 +103,7 @@ for($i = 0; $i <= $#imei_data1; $i++){
 	
 		if($imei_data1[$i] eq $imei_data2[$j]){
 			$counted[$i]++;
-			print "ahi $imei_data1[$i] \n";
+			#print "ahi $imei_data1[$i] \n";
 			last;  # 一旦出现重复，立即退出循环，避免一个IMEI在一个excel中的重复统计
 			
 		}	
@@ -139,22 +139,26 @@ $newworkbook->SaveAs($file) or die "Save failer.";
 my $newSheet = $newworkbook->Sheets(1);
 $newSheet->{name} = "统计";
 
-my @counted_array = ();
+$rangeEnd = Z.2000; 
+#$counted_array = $newSheet->Range("A1:rangeEnd")->{'Value'};
 
-for($i = 0; $i <= $#imei_data1; $i++){
+@$counted_array[0] = $$allDataArray1[0];
+for($i = 1; $i <= $#imei_data1+1; $i++){
 	
-	if($counted[$i] eq 2){
-		push @counted_imei, $imei_data1[$i];
+	if($counted[$i-1] eq 2){
+		push @counted_imei, $imei_data1[$i-1];
 		print "fgg $imei_data1[$i] \n";
-		push @counted_array, $$allDataArray1[$i];
-		
+	  push @$counted_array, $$allDataArray1[$i-1];
+	 		
 	}
 }
 
-my $count = @counted_array;
-$Num = X.$count;
+my $count = @$counted_array - 1;
+print "aoifkb $count \n";
 
-$newSheet->Range("A1:$Num")->{'value'} = @counted_array;	
+$Num = Z.$count;
+
+$newSheet->Range("A1:$Num")->{'value'} = $counted_array;	
 
 $newworkbook->Save();
 $newworkbook->Close();
