@@ -59,16 +59,16 @@ my $filePath = $dir."\/".$path;
 print "路径： $filePath \n";
 # 获取数据
 my $workbook = $Excel->Workbooks->Open($filePath);
-my $workSheet = $workbook->Sheets("全部数据");
+my $workSheet = $workbook->Sheets(1);
 #读出EXCEL数据到数组
 my $Rowcount = $workSheet->usedrange->rows->count;       #最大有效行数 
 $totalRow = $Rowcount + 1;
-my $numDRow = X.$totalRow;
-my $allDataArray = $workSheet->Range("A1:$numDRow")->{'Value'};  	  
+my $numDRow = Z.$totalRow;
+my $allDataArray3 = $workSheet->Range("A1:$numDRow")->{'Value'};  	  
 print "aonf $totalRow \n";
 my @imei_data3 = 0 x $Rowcount-1;
 for($j = 1; $j < $Rowcount; $j++){
-	 $imei_data3[$j -1] = $$allDataArray[$j][3];
+	 $imei_data3[$j -1] = $$allDataArray3[$j][3];
 } 
 $workbook->Save();
 $workbook->Close();  
@@ -79,16 +79,16 @@ my $filePath = $dir."\/".$path;
 print "路径： $filePath \n";
 # 获取数据
 my $workbook = $Excel->Workbooks->Open($filePath);
-my $workSheet = $workbook->Sheets("全部数据");
+my $workSheet = $workbook->Sheets(1);
 #读出EXCEL数据到数组
 my $Rowcount = $workSheet->usedrange->rows->count;       #最大有效行数 
 $totalRow = $Rowcount + 1;
-my $numDRow = X.$totalRow;
-my $allDataArray = $workSheet->Range("A1:$numDRow")->{'Value'};
+my $numDRow = Z.$totalRow;
+my $allDataArray4 = $workSheet->Range("A1:$numDRow")->{'Value'};
 print "aonf $totalRow \n";
 my @imei_data4 = 0 x $Rowcount-1;
 for($j = 1; $j < $Rowcount; $j++){
-	 $imei_data4[$j -1] = $$allDataArray[$j][3];
+	 $imei_data4[$j -1] = $$allDataArray4[$j][3];
 }  
 $workbook->Save();
 $workbook->Close();  
