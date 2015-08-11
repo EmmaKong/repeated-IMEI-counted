@@ -53,7 +53,7 @@ for($j = 1; $j < $Rowcount; $j++){
 $workbook->Save();
 $workbook->Close();  
 
-=pod
+
 my $path = $allfilePath[2];  	
 my $filePath = $dir."\/".$path;
 print "路径： $filePath \n";
@@ -93,12 +93,12 @@ for($j = 1; $j < $Rowcount; $j++){
 $workbook->Save();
 $workbook->Close();  
 
-=cut
+
 my @counted_imei = ();
 my @counted = 0 x ($#imei_data1+1);
 
 for($i = 0; $i <= $#imei_data1; $i++){
-	$counted[$i] ++;
+	$counted[$i]++;
 	for($j = 0; $j <= $#imei_data2; $j++){
 	
 		if($imei_data1[$i] eq $imei_data2[$j]){
@@ -108,10 +108,9 @@ for($i = 0; $i <= $#imei_data1; $i++){
 			
 		}	
 	}
-=pod	
 	for($j = 0; $j <= $#imei_data3; $j++){
 	
-		if($imei_data1[0] eq $imei_data3[$j]){
+		if($imei_data1[$i] eq $imei_data3[$j]){
 			$counted[$i]++;
 		#	print "ffg $imei_data1[$i] \n";
 			last;
@@ -120,13 +119,12 @@ for($i = 0; $i <= $#imei_data1; $i++){
 	
 	for($j = 0; $j <= $#imei_data4; $j++){
 	
-		if($imei_data1[0] eq $imei_data4[$j]){
+		if($imei_data1[$i] eq $imei_data4[$j]){
 			$counted[$i]++;
 		#	print "fgg $imei_data1[$i] \n";
 			last;  # 一旦出现重复，立即退出循环，避免一个IMEI在一个excel中的重复统计
 		}	
 	}
-=cut
 	
 }
 
@@ -145,10 +143,10 @@ $rangeEnd = Z.2000;
 @$counted_array[0] = $$allDataArray1[0];
 for($i = 1; $i <= $#imei_data1+1; $i++){
 	
-	if($counted[$i-1] eq 2){
+	if($counted[$i-1] eq 4){
 		push @counted_imei, $imei_data1[$i-1];
-		print "fgg $imei_data1[$i] \n";
-	  push @$counted_array, $$allDataArray1[$i-1];
+		print "fgg $imei_data1[$i-1] \n";
+	  push @$counted_array, $$allDataArray1[$i];
 	 		
 	}
 }
